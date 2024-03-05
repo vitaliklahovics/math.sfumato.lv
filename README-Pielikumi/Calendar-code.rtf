@@ -1,0 +1,94 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 function getFileList(userName) \{\
+    var xhr = new XMLHttpRequest();\
+    xhr.open('GET', '../../php/get-files-calendar.php?userName=' + userName, true);\
+    xhr.onreadystatechange = function () \{\
+        if (xhr.readyState == 4 && xhr.status == 200) \{\
+            var fileList = JSON.parse(xhr.responseText);\
+            fileList.reverse();\
+            displayFileList(fileList);\
+        \}\
+    \};\
+    xhr.send();\
+\}\
+\
+function displayFileList(fileList) \{\
+    var fileListDiv = document.getElementById('fileList');\
+    fileListDiv.innerHTML = '';\
+\
+    fileList.forEach(function (file) \{\
+        var fileDiv = document.createElement('div');\
+        fileDiv.innerHTML = ' <a href="#" onclick="showFileContent(\\'' + file.filename + '\\')">' + file.filename + '</a><br><br>';\
+        fileListDiv.appendChild(fileDiv);\
+    \});\
+\}\
+\
+function closeFileContent() \{\
+    var fileContentDiv = document.getElementById('file-content');\
+    var ovarlayDiv = document.getElementById('overlayF');\
+\
+    setTimeout(function() \{\
+        fileContentDiv.style.opacity = "0";\
+    \}, 1);\
+    fileContentDiv.style.display = "none";\
+\
+    setTimeout(function() \{\
+        ovarlayDiv.style.opacity = "0";\
+    \}, 1);\
+    ovarlayDiv.style.display = "none";\
+\}\
+\
+function showFileContent(filename) \{\
+    var fileContentDiv = document.getElementById('file-content');\
+    var ovarlayDiv = document.getElementById('overlayF');\
+\
+    var xhr = new XMLHttpRequest();\
+    xhr.open('GET', '../../users/' + login + '/' + filename, true);\
+    xhr.onreadystatechange = function () \{\
+        if (xhr.readyState == 4 && xhr.status == 200) \{\
+            var fileContent = JSON.parse(xhr.responseText);\
+            displayFileContent(fileContent);\
+        \}\
+    \};\
+    xhr.send();\
+\
+    fileContentDiv.style.display = "flex";\
+    setTimeout(function() \{\
+        fileContentDiv.style.opacity = "1";\
+    \}, 1);\
+\
+    ovarlayDiv.style.display = "block";\
+    setTimeout(function() \{\
+        ovarlayDiv.style.opacity = "1";\
+    \}, 1);\
+\}\
+\
+function displayFileContent(fileContent) \{\
+    var contentTable;\
+    if (lang === "en") \{\
+        contentTable = '<table><tr><th>Example</th><th>Right?</th><th>Time</th></tr>';\
+    \}\
+    if (lang === "lv") \{\
+        contentTable = '<table><tr><th>Piem\uc0\u275 rs</th><th>Pareizi?</th><th>Laiks</th></tr>';\
+    \}\
+    if (lang === "ru") \{\
+        contentTable = '<table><tr><th>\uc0\u1055 \u1088 \u1080 \u1084 \u1077 \u1088 </th><th>\u1055 \u1088 \u1072 \u1074 \u1080 \u1083 \u1100 \u1085 \u1086 ?</th><th>\u1042 \u1088 \u1077 \u1084 \u1103 </th></tr>';\
+    \}\
+    \
+    fileContent.forEach(function (item) \{\
+        if (item.iscorrect === "+") \{\
+            contentTable += '<tr><td>' + item.example + '</td><td style="font-weight: bold; color: green;">' + item.iscorrect + '</td><td>' + item.time + 's. </td></tr>';\
+        \} else \{\
+            contentTable += '<tr><td>' + item.example + '</td><td style="font-weight: bold; color: red;">' + item.iscorrect + '</td><td>' + item.time + 's. </td></tr>';\
+        \}\
+    \});\
+    contentTable += '</table>';\
+\
+    document.getElementById("file-content").innerHTML = contentTable;\
+}

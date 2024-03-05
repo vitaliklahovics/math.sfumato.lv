@@ -1,0 +1,359 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 let maxAnswer = 0;\
+let signs = "";\
+let goalCount = 0;\
+let errorWeight = 0;\
+\
+let correctAnswers = 0;\
+let wrongAnswers = 0;\
+let answers = 0;\
+let currentTime = 0;\
+\
+let firstNumber = 0;\
+let secondNumber = 0;\
+let answer = 0;\
+let sign = "";\
+\
+let allTimeIntervalId;\
+let currentExerciseTimeIntervalId;\
+let congratulations = false;\
+\
+let results = [];\
+\
+//add result\
+function addResult(example, isCorrect, time) \{\
+    results.push(\{\
+        "example": example,\
+        "iscorrect": isCorrect,\
+        "time": time\
+    \});\
+\}\
+\
+//saving data to file\
+function SaveData() \{\
+    let currentTime = new Date().toISOString().slice(0, 19).replace(/[-T]/g, "_").replace(/:/g, "-");\
+    \
+    let data = \{\
+        results: results,\
+        username: login,\
+        currentTime: currentTime\
+    \};\
+    \
+    let xhr = new XMLHttpRequest();\
+    xhr.open("POST", "../../php/save-to-file.php", true);\
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");\
+    xhr.send(JSON.stringify(data));\
+\}\
+\
+//write data to database\
+function setUserInf(login, correctAnswers, wrongAnswers, minutes) \{\
+	$.ajax(\{\
+		url: "../../php/set-exercise-data.php",\
+		method: "POST",\
+		data: \{ login: login, correctAnswers: correctAnswers, wrongAnswers: wrongAnswers, minutes: minutes \},\
+		dataType: "json",\
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",\
+		success: function (response) \{\
+			console.log("set-inf: login: ", login, '; correctAnswers: +', correctAnswers, '; wrongAnswers: +', wrongAnswers, '; minutes: +', minutes, '; response: ', response);\
+		\},\
+		error: function () \{\
+			if (lang === "ru") \{\
+				alert("\uc0\u1055 \u1088 \u1086 \u1080 \u1079 \u1086 \u1096 \u1083 \u1072  \u1086 \u1096 \u1080 \u1073 \u1082 \u1072  \u1087 \u1088 \u1080  \u1089 \u1086 \u1093 \u1088 \u1072 \u1085 \u1077 \u1085 \u1080 \u1080  \u1076 \u1072 \u1085 \u1085 \u1099 \u1093  \u1087 \u1086 \u1087 \u1088 \u1086 \u1073 \u1091 \u1081 \u1090 \u1077  \u1074 \u1086 \u1081 \u1090 \u1080  \u1087 \u1086 \u1074 \u1090 \u1086 \u1088 \u1085 \u1086 .");\
+			\}\
+			if (lang === "lv") \{\
+				alert("Saglab\uc0\u257 jot datus, rad\u257 s k\u316 \u363 da. L\u363 dzu, m\u275 \u291 iniet pieteikties v\u275 lreiz.");\
+			\}\
+			if (lang === "en") \{\
+				alert("An error occurred while saving data, please try logging in again.");\
+			\}\
+		\},\
+	\});\
+\}\
+\
+//get random num (min <= num <= max)\
+function getRandomNumber(min, max) \{\
+	return Math.floor(Math.random() * (max - min + 1)) + min;\
+\}\
+\
+//time formating\
+function formatTime(seconds) \{\
+	const minutes = Math.floor(seconds / 60);\
+	const remainingSeconds = seconds % 60;\
+	const formattedMinutes = String(minutes).padStart(2, '0');\
+	const formattedSeconds = String(remainingSeconds).padStart(2, '0');\
+	return `$\{formattedMinutes\}:$\{formattedSeconds\}`;\
+\}\
+\
+//timer updating\
+function updateTimer(id) \{\
+	const element = document.getElementById(id);\
+	const currentTime = element.textContent;\
+	const timeParts = currentTime.split(":");\
+	const minutes = parseInt(timeParts[0]);\
+	const seconds = parseInt(timeParts[1]);\
+	let totalSeconds = minutes * 60 + seconds;\
+\
+	totalSeconds += 1;\
+	element.textContent = formatTime(totalSeconds);\
+\}\
+\
+//timers stoppping\
+function stopTimers() \{\
+	clearInterval(allTimeIntervalId);\
+	clearInterval(currentExerciseTimeIntervalId);\
+\}\
+\
+//timers starting\
+function startTimers() \{\
+	allTimeIntervalId = setInterval(() => updateTimer("all-time"), 1000);\
+	currentExerciseTimeIntervalId = setInterval(() => updateTimer("current-exercise-time"), 1000);\
+\}\
+\
+//getting exercise settings\
+function getSettingDatas(event) \{\
+    event.preventDefault();\
+		\
+	maxAnswer = document.getElementById("max-answer").value;\
+	signs = document.getElementById("sign").value;\
+\
+	goalCount = document.getElementById("exercises-count").value;\
+\
+	errorWeight = document.getElementById("error-weight").value;\
+		\
+	document.getElementById("all-answers").textContent = "0";\
+	document.getElementById("all-time").textContent = "00:00";\
+	document.getElementById("goal-count").textContent = goalCount;\
+\
+	document.getElementById("correct-answers").textContent = "0";\
+	document.getElementById("wrong-answers").textContent = "0";\
+	document.getElementById("current-exercise-time").textContent = "00:00";\
+\
+	document.getElementById("exercise-settings").style.display = "none";\
+	document.getElementById("exercise-block").style.display = "block";\
+	setTimeout(function() \{\
+		document.getElementById("exercise-block").style.opacity = "1";\
+	\}, 10);\
+\
+	document.body.style.overflow = "hidden";\
+\
+	document.getElementById("answer").focus();\
+\
+	startTimers();\
+	\
+	generate();\
+\}\
+\
+//sign gererating\
+function generateSign() \{\
+	let ans = "";\
+	\
+	if ((signs == "+") || (signs == "-") || (signs == "*") || (signs == "/")) \{\
+		ans = signs\
+	\}\
+	if (signs == "+-") \{\
+		let num = getRandomNumber(1, 10);\
+		if (num % 2 == 0) \{\
+			ans = "+"\
+		\} else \{\
+			ans = "-"\
+		\}\
+	\}\
+	if (signs == "*/") \{\
+		let num = getRandomNumber(1, 10);\
+		if (num % 2 == 0) \{\
+			ans = "*"\
+		\} else \{\
+			ans = "/"\
+		\}\
+	\}\
+	if (signs == "+-*") \{\
+		let num = getRandomNumber(1, 100);\
+		if (num % 2 == 0) \{\
+			ans = "*"\
+		\} else \{\
+			if (num % 3 == 0) \{\
+				ans = "-"\
+			\} else \{\
+				ans = "+"\
+			\}\
+		\}\
+	\}\
+	if (signs == "+-*/") \{\
+		let num = getRandomNumber(1, 100);\
+		if (num % 2 == 0) \{\
+			/* + | - */\
+			let num = getRandomNumber(1, 100);\
+			if (num % 2 == 0) \{\
+				ans = "+"\
+			\} else \{\
+				ans = "-"\
+			\}\
+		\} else \{\
+			/* * | / */\
+			let num = getRandomNumber(1, 100);\
+			if (num % 2 == 0) \{\
+				ans = "*"\
+			\} else \{\
+				ans = "/"\
+			\}			\
+		\}\
+	\}\
+	\
+	return ans\
+\}\
+\
+//example showing\
+function showData() \{\
+	document.getElementById("first-num").textContent = firstNumber;\
+	document.getElementById("second-num").textContent = secondNumber;\
+	document.getElementById("current-sign").textContent = sign;\
+\}\
+\
+//example generating\
+function generate() \{\
+	sign = generateSign();\
+		\
+	if (sign == "+") \{\
+		firstNumber = getRandomNumber(1, maxAnswer / 2)\
+		secondNumber = getRandomNumber(1, maxAnswer / 2);\
+		answer = firstNumber + secondNumber;\
+	\}\
+	if (sign == "-") \{\
+		firstNumber = getRandomNumber(1, maxAnswer / 2)\
+		secondNumber = getRandomNumber(1, maxAnswer / 2);\
+		answer = firstNumber + secondNumber;\
+		\
+		let num = answer;\
+		answer = firstNumber;\
+		firstNumber = num;\
+	\}\
+	if (sign == "*") \{\
+		let num = getRandomNumber(1, 100);\
+		\
+		if (num % 2 == 0) \{\
+			firstNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer)));\
+			secondNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer)));\
+			answer = firstNumber * secondNumber;\
+		\} else \{\
+			firstNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer) * 2));\
+			secondNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer) / 2));\
+			answer = firstNumber * secondNumber;\
+		\}\
+		\
+		num = getRandomNumber(1, 100);\
+		if (num % 2 !== 0) \{\
+			num = firstNumber;\
+			firstNumber = secondNumber;\
+			secondNumber = num;\
+		\}\
+	\}\
+	if (sign == "/") \{\
+		let num = getRandomNumber(1, 100);\
+		\
+		if (num % 2 == 0) \{\
+			firstNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer)));\
+			secondNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer)));\
+			answer = firstNumber * secondNumber;\
+		\} else \{\
+			firstNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer) * 2));\
+			secondNumber = getRandomNumber(2, Math.floor(Math.sqrt(maxAnswer) / 2));\
+			answer = firstNumber * secondNumber;\
+		\}\
+		\
+		if (num % 2 !== 0) \{\
+			num = firstNumber;\
+			firstNumber = secondNumber;\
+			secondNumber = num;\
+		\}\
+		\
+		num = answer;\
+		answer = firstNumber;\
+		firstNumber = num;\
+	\}\
+	\
+	showData();	\
+\}\
+\
+//answer checking\
+function check() \{\
+	var userAnswer = document.getElementById("answer").value;\
+	const element = document.getElementById("current-exercise-time");\
+	const currentTime = element.textContent;\
+	const timeParts = currentTime.split(":");\
+	const minutes = parseInt(timeParts[0]);\
+	const seconds = parseInt(timeParts[1]);\
+	let totalSeconds = minutes * 60 + seconds;\
+\
+	if (userAnswer == answer) \{\
+\
+		correctAnswers += 1;\
+		answers = answers + 1;\
+		document.body.style.backgroundColor = "rgba(153, 255, 153, .6)"\
+\
+		totalSeconds += 1;\
+		\
+		setUserInf(login, 1, 0, totalSeconds);\
+		addResult(firstNumber + sign + secondNumber + "=" + userAnswer, "+", totalSeconds);\
+		\
+		setTimeout(function() \{\
+			document.body.style.backgroundColor = "#ececec";\
+		\}, 1300);\
+	\} else \{\
+		wrongAnswers += 1;\
+		answers = answers - errorWeight;\
+		setUserInf(login, 0, 1, totalSeconds);\
+		addResult(firstNumber + sign + secondNumber + "=" + userAnswer, "-", totalSeconds);\
+		document.getElementById("error-div").style.display = "block";\
+		document.getElementById("err-first-num").textContent = firstNumber;\
+		document.getElementById("err-current-sign").textContent = sign;\
+		document.getElementById("err-second-num").textContent = secondNumber;\
+		document.getElementById("err-answer").value = answer;\
+		document.body.style.backgroundColor = "rgba(255, 0, 0, .6)"\
+		\
+		setTimeout(function() \{\
+			document.body.style.backgroundColor = "#ececec";\
+			document.getElementById("error-div").style.display = "none";\
+		\}, 1300);\
+	\}\
+	\
+	document.getElementById("current-exercise-time").textContent = "00:00";\
+	document.getElementById("answer").value = "";\
+	\
+	document.getElementById("correct-answers").textContent = correctAnswers;\
+	document.getElementById("wrong-answers").textContent = wrongAnswers;\
+	document.getElementById("all-answers").textContent = answers;\
+	\
+	if ((answers == goalCount) && !(congratulations)) \{\
+		SaveData();\
+		stopTimers();\
+		document.getElementById("answer").blur();\
+		const confettiElements = document.querySelectorAll(".confetti");\
+		confettiElements.forEach((element) => \{\
+			element.style.display = "block";\
+		\});\
+		document.getElementById("exercise-end").style.display = "flex";\
+		setTimeout(function() \{\
+			document.getElementById("exercise-end").style.transform = "translateY(0)";\
+		\}, 10);\
+\
+		document.getElementById("wrong-answers-end").textContent = wrongAnswers;\
+		document.getElementById("correct-answers-end").textContent = correctAnswers;\
+		document.getElementById("all-time-end").textContent = document.getElementById("all-time").textContent;\
+\
+		congratulations = true;\
+	\}	\
+\}\
+\
+//anwer checking and new one generating\
+function checkAnswerAndGenerateNew(event) \{\
+	event.preventDefault();\
+	check();\
+	generate();\
+\}\
+}

@@ -1,0 +1,247 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 function getCookieValue(cookieName) \{\
+    const cookies = document.cookie.split('; ');\
+    for (const cookie of cookies) \{\
+        const [name, value] = cookie.split('=');\
+        if (name === cookieName) \{\
+            return decodeURIComponent(value);\
+        \}\
+    \}\
+    return null;\
+\}\
+\
+function containsOnlyLatinLettersAndNumbers(inputString) \{\
+    var regex = /^[a-zA-Z0-9-_]+$/;\
+    return regex.test(inputString);\
+\}		\
+\
+const login = getCookieValue("login");\
+const password = getCookieValue("password");\
+if (login && password) \{\
+    $.ajax(\{\
+        url: "php/check-user.php",\
+        method: "POST",\
+        data: \{ login: login, password: password \},\
+        dataType: "json",\
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",\
+        success: function (response) \{\
+            if (response.success) \{\
+                window.location.href = "app/profile/";\
+            \}\
+        \},\
+        error: function () \{\
+            switch (language) \{\
+                case "en":\
+                    alert("An error occurred while verifying the user, please try logging in again.");\
+                    break;\
+                case "ru":\
+                    alert("\uc0\u1055 \u1088 \u1086 \u1080 \u1079 \u1086 \u1096 \u1083 \u1072  \u1086 \u1096 \u1080 \u1073 \u1082 \u1072  \u1087 \u1088 \u1080  \u1087 \u1088 \u1086 \u1074 \u1077 \u1088 \u1082 \u1077  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103 , \u1087 \u1086 \u1087 \u1088 \u1086 \u1073 \u1091 \u1081 \u1090 \u1077  \u1074 \u1086 \u1081 \u1090 \u1080  \u1087 \u1086 \u1074 \u1090 \u1086 \u1088 \u1085 \u1086 .");\
+                    break;\
+                case "lv":\
+                    alert("P\uc0\u257 rbaudot lietot\u257 ju, rad\u257 s k\u316 \u363 da. L\u363 dzu, m\u275 \u291 iniet pieteikties v\u275 lreiz.");\
+            \}				\
+        \},\
+    \});\
+\}\
+\
+const signInBtn = document.getElementById("signIn");\
+const signUpBtn = document.getElementById("signUp");\
+const firstForm = document.getElementById("form1");\
+const secondForm = document.getElementById("form2");\
+\
+//login form\
+firstForm.addEventListener("submit", (e) => \{\
+    e.preventDefault();\
+    const login0 = document.getElementById("login0").value;\
+    const password0 = document.getElementById("password0").value;\
+    \
+    $.ajax(\{\
+        url: "php/check-user.php",\
+        method: "POST",\
+        data: \{ login: login0, password: password0 \},\
+        dataType: "json",\
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",\
+        success: function (response) \{3\
+            if (response.success) \{\
+                setTimeout(() => \{\
+                    $.ajax(\{\
+                        url: "../../php/get-settings-data.php",\
+                        method: "POST",\
+                        data: \{ login: login0 \},\
+                        dataType: "json",\
+                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",\
+                        success: function (response) \{\
+                            if (response.success) \{\
+                                if (response.data && response.data.length > 0) \{\
+                                    var userData = response.data[0];\
+                                    \
+                                    document.cookie = `lang=$\{encodeURIComponent(userData["language"])\}; path=/`;\
+                                    document.cookie = `color=$\{encodeURIComponent(userData["color"])\}; path=/`;\
+                                    document.cookie = `login=$\{encodeURIComponent(login0)\}; path=/`;\
+                                    document.cookie = `password=$\{encodeURIComponent(password0)\}; path=/`;\
+                                \} else \{\
+                                    if (lang === "ru") \{\
+                                        alert("\uc0\u1055 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1100  \u1085 \u1077  \u1085 \u1072 \u1081 \u1076 \u1077 \u1085 .");\
+                                    \}\
+                                    if (lang === "en") \{\
+                                        alert("User is not found.");\
+                                    \}\
+                                    if (lang === "lv") \{\
+                                        alert("Lietot\uc0\u257 js nav atrasts.");\
+                                    \}								\
+                                \}\
+                                window.location.href = "app/profile/";\
+                            \} else \{\
+                                if (lang === "ru") \{\
+                                    alert("\uc0\u1055 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1100  \u1085 \u1077  \u1085 \u1072 \u1081 \u1076 \u1077 \u1085 : " + response.error + ".");\
+                                \}\
+                                if (lang === "en") \{\
+                                    alert("User is not found: " + response.error + ".");\
+                                \}\
+                                if (lang === "lv") \{\
+                                    alert("Lietot\uc0\u257 js nav atrasts: " + response.error + ".");\
+                                \}\
+                            \}\
+                        \},\
+                        error: function () \{\
+                            if (lang === "ru") \{\
+                                alert("\uc0\u1055 \u1088 \u1086 \u1080 \u1079 \u1086 \u1096 \u1083 \u1072  \u1086 \u1096 \u1080 \u1073 \u1082 \u1072  \u1087 \u1088 \u1080  \u1087 \u1086 \u1083 \u1091 \u1095 \u1077 \u1085 \u1080 \u1080  \u1076 \u1072 \u1085 \u1085 \u1099 \u1093  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103 .");\
+                            \}\
+                            if (lang === "en") \{\
+                                alert("An error occurred while retrieving user data.");\
+                            \}\
+                            if (lang === "lv") \{\
+                                alert("Izg\uc0\u363 stot lietot\u257 ja datus, rad\u257 s k\u316 \u363 da.");\
+                            \}\
+                        \},\
+                    \});            \
+                \}, 100);\
+            \} else \{\
+                switch (language) \{\
+                    case "en":\
+                        alert("There is no user with this data. Please register or try again.");\
+                        break;\
+                    case "ru":\
+                        alert("\uc0\u1053 \u1077 \u1090  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103  \u1089  \u1101 \u1090 \u1080 \u1084 \u1080  \u1076 \u1072 \u1085 \u1085 \u1099 \u1084 \u1080 . \u1055 \u1086 \u1078 \u1072 \u1083 \u1091 \u1081 \u1089 \u1090 \u1072 , \u1079 \u1072 \u1088 \u1077 \u1075 \u1080 \u1089 \u1090 \u1088 \u1080 \u1088 \u1091 \u1081 \u1090 \u1077 \u1089 \u1100  \u1080 \u1083 \u1080  \u1087 \u1086 \u1087 \u1088 \u1086 \u1073 \u1091 \u1081 \u1090 \u1077  \u1077 \u1097 \u1077  \u1088 \u1072 \u1079 .");\
+                        break;\
+                    case "lv":\
+                        alert("Nav neviena lietot\uc0\u257 ja ar \'9aiem datiem. L\u363 dzu, re\u291 istr\u275 jieties vai m\u275 \u291 iniet v\u275 lreiz.");\
+                \}\
+            \}\
+        \},\
+        error: function () \{\
+            switch (language) \{\
+                case "en":\
+                    alert("An error occurred while verifying the user.");\
+                    break;\
+                case "ru":\
+                    alert("\uc0\u1055 \u1088 \u1086 \u1080 \u1079 \u1086 \u1096 \u1083 \u1072  \u1086 \u1096 \u1080 \u1073 \u1082 \u1072  \u1087 \u1088 \u1080  \u1087 \u1088 \u1086 \u1074 \u1077 \u1088 \u1082 \u1077  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103 .");\
+                    break;\
+                case "lv":\
+                    alert("P\uc0\u257 rbaudot lietot\u257 ju, rad\u257 s k\u316 \u363 da.");\
+            \}\
+        \},\
+    \});\
+\});\
+\
+//sig up form\
+secondForm.addEventListener("submit", (e) => \{\
+    e.preventDefault(); \
+    const login1 = document.getElementById("login1").value;\
+    const password1 = document.getElementById("password1").value;\
+\
+    var login1OK = containsOnlyLatinLettersAndNumbers(login1);\
+    var password1OK = containsOnlyLatinLettersAndNumbers(password1);\
+\
+    if (!login1OK) \{\
+        switch (language) \{\
+            case "en":\
+                alert("The username can only contain numbers and Latin letters.");\
+                break;\
+            case "ru":\
+                alert("\uc0\u1048 \u1084 \u1103  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103  \u1084 \u1086 \u1078 \u1077 \u1090  \u1089 \u1086 \u1076 \u1077 \u1088 \u1078 \u1072 \u1090 \u1100  \u1090 \u1086 \u1083 \u1100 \u1082 \u1086  \u1094 \u1080 \u1092 \u1088 \u1099  \u1080  \u1083 \u1072 \u1090 \u1080 \u1085 \u1089 \u1082 \u1080 \u1077  \u1073 \u1091 \u1082 \u1074 \u1099 .");\
+                break;\
+            case "lv":\
+                alert("Lietot\uc0\u257 jv\u257 rd\u257  dr\u299 kst b\u363 t tikai cipari un lat\u299 \u326 u burti.");\
+        \}				\
+    \}\
+    if (!password1OK) \{\
+        switch (language) \{\
+            case "en":\
+                alert("The password can only contain numbers and Latin letters.");\
+                break;\
+            case "ru":\
+                alert("\uc0\u1055 \u1072 \u1088 \u1086 \u1083 \u1100  \u1084 \u1086 \u1078 \u1077 \u1090  \u1089 \u1086 \u1076 \u1077 \u1088 \u1078 \u1072 \u1090 \u1100  \u1090 \u1086 \u1083 \u1100 \u1082 \u1086  \u1094 \u1080 \u1092 \u1088 \u1099  \u1080  \u1083 \u1072 \u1090 \u1080 \u1085 \u1089 \u1082 \u1080 \u1077  \u1073 \u1091 \u1082 \u1074 \u1099 .");\
+                break;\
+            case "lv":\
+                alert("Parol\uc0\u275  var b\u363 t tikai cipari un lat\u299 \u326 u burti.");\
+        \}				\
+    \}\
+    \
+    if (login1OK && password1OK) \{			\
+        document.cookie = `login=$\{encodeURIComponent(login1)\}; path=/`;\
+        document.cookie = `password=$\{encodeURIComponent(password1)\}; path=/`;\
+        var languageLogin = getCookieValue("lang");\
+        var colorLogin = getCookieValue("color");\
+\
+        if (languageLogin) \{\
+            setLang(languageLogin);\
+        \} else \{\
+            setLang("en");\
+        \}\
+        if (colorLogin) \{\
+            SetColor(colorLogin);\
+        \} else \{\
+            SetColor("green-blue");\
+        \}\
+\
+        setTimeout(() => \{\
+            $.ajax(\{\
+                url: "php/add-user.php",\
+                method: "POST",\
+                data: \{ login: login1, password: password1, color: colorLogin, language: languageLogin\},\
+                dataType: "json",\
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",\
+                success: function (response) \{\
+                    if (response.success) \{\
+                        window.location.href = "app/profile/";\
+                    \} else \{\
+                        if (response.message === '\uc0\u1055 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1100  \u1089  \u1090 \u1072 \u1082 \u1080 \u1084  \u1083 \u1086 \u1075 \u1080 \u1085 \u1086 \u1084  \u1091 \u1078 \u1077  \u1089 \u1091 \u1097 \u1077 \u1089 \u1090 \u1074 \u1091 \u1077 \u1090 ') \{\
+                            switch (language) \{\
+                                case "en":\
+                                    alert("A user with the same name already exists.");\
+                                    break;\
+                                case "ru":\
+                                    alert("\uc0\u1055 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1100  \u1089  \u1090 \u1072 \u1082 \u1080 \u1084  \u1080 \u1084 \u1077 \u1085 \u1077 \u1084  \u1091 \u1078 \u1077  \u1089 \u1091 \u1097 \u1077 \u1089 \u1090 \u1074 \u1091 \u1077 \u1090 .");\
+                                    break;\
+                                case "lv":\
+                                    alert("Lietot\uc0\u257 js ar t\u257 du pa\'9au nosaukumu jau eksist\u275 .");\
+                            \}				\
+                        \} else \{\
+                            alert(response.message);\
+                        \}\
+                    \}\
+                \},\
+                error: function () \{\
+                    switch (language) \{\
+                        case "en":\
+                            alert("An error occurred while creating a new user.");\
+                            break;\
+                        case "ru":\
+                            alert("\uc0\u1055 \u1088 \u1086 \u1080 \u1079 \u1086 \u1096 \u1083 \u1072  \u1086 \u1096 \u1080 \u1073 \u1082 \u1072  \u1087 \u1088 \u1080  \u1089 \u1086 \u1079 \u1076 \u1072 \u1085 \u1080 \u1080  \u1085 \u1086 \u1074 \u1086 \u1075 \u1086  \u1087 \u1086 \u1083 \u1100 \u1079 \u1086 \u1074 \u1072 \u1090 \u1077 \u1083 \u1103 .");\
+                            break;\
+                        case "lv":\
+                            alert("Veidojot jaunu lietot\uc0\u257 ju, rad\u257 s k\u316 \u363 da.");\
+                    \}				\
+                \},\
+            \});\
+        \}, 100);\
+    \}\
+\});		    \
+}
