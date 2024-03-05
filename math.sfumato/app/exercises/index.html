@@ -1,0 +1,357 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exercises</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/x-icon" href="https://math.sfumato.lv/images/site/icon/favicon.ico">
+	
+	<link rel="stylesheet" href="../../css/base.css">	
+	<link rel="stylesheet" href="../../css/app/app.css">	
+	<link rel="stylesheet" href="../../css/app/exercises.css">	
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="body">
+	<!-- NAVBAR -->
+	<nav id="nav">
+		<section class="top-part" id="top-part">
+			<div class="image">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</div>
+		</section>
+		<section class="menu-part">
+			<a href="../profile/">
+				<i class="fa fa-home"></i> 
+				<span class="lang-c ru">Главная</span>
+				<span class="lang-c lv">Uz galveno</span>
+				<span class="lang-c en">Home</span>
+			</a>
+			<a href="../exercises/" class="active">
+				<i class="fa fa-book"></i>
+				<span class="lang-c ru">Упражнения</span>
+				<span class="lang-c en">Exercises</span>
+				<span class="lang-c lv">Vingrinājumi</span>
+			</a>
+			<a href="../game/">
+				<i class="fa fa-gamepad"></i>
+				<span class="lang-c ru">Игра</span>
+				<span class="lang-c lv">Spēle</span>
+				<span class="lang-c en">Game</span>
+			</a>
+			<a href="../statistic/">
+				<i class="fa fa-bar-chart"></i>
+				<span class="lang-c ru">Статистика</span>
+				<span class="lang-c en">Statistics</span>
+				<span class="lang-c lv">Statistika</span>
+			</a>
+			<a href="../calendar/">
+				<i class="fa fa-calendar"></i>
+				<span class="lang-c ru">Календарь</span>
+				<span class="lang-c lv">Kalendārs</span>
+				<span class="lang-c en">Calendar</span>
+			</a>
+		</section>
+		<section class="settings">
+			<a href="../settings/">
+				<i class="fa fa-gear"></i> 
+				<span class="lang-c ru">Настройки</span>
+				<span class="lang-c lv">Iestatījumi</span>
+				<span class="lang-c en">Settings</span>
+			</a>
+		</section>
+	</nav>
+	<section id="nav-overlay">
+		<h1><i class="fa fa-home"></i></h1>
+	</section>
+	<section class="small" id="small">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="navicon-block">
+			<div class="menu-icon-div" onclick="opennav()">
+				<p><i class="fa fa-navicon"></i></p>
+			</div>
+		</section>
+	</section>
+	<section class="overlay" id="overlay" onclick="closenav()"></section>
+	<script>
+		function opennav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+			var body = document.getElementById("body");
+
+			nav.classList.remove("zero-nav");
+			nav.classList.add("nozero-nav");
+			overlay.style.display = "block";
+			overlay.style.opacity = "1";
+			body.style.overflow = "hidden";
+		}
+
+		function closenav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+
+			nav.classList.add("zero-nav");
+			nav.classList.remove("nozero-nav");
+			overlay.style.opacity = "0";
+			overlay.style.display = "none";
+			body.style.overflow = "auto";
+		}
+	</script>
+	
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+
+	<div class="confetti">
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+	</div>
+	<div class="confetti">
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+	</div>
+	<div class="confetti">
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+	</div>
+
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+	
+	<main>
+		<!-- SETTINGS -->
+		<section class="exercise-settings" id="exercise-settings">
+			<form onSubmit="getSettingDatas(event)" class="form-settings">
+				<h1>
+					<span class="lang-c ru">Настройте упражнение:</span>
+					<span class="lang-c en">Set up the exercise:</span>
+					<span class="lang-c lv">Iestatiet vingrinājumu:</span>
+				</h1>
+
+				<section>
+					<div class="setting-group">
+						<label class="label">
+							<span class="lang-c ru">Введите максимальный ответ:</span> 
+							<span class="lang-c lv">Ievadiet maksimālo atbildi:</span> 
+							<span class="lang-c en">Enter maximum answer:</span> 
+						</label>
+						<input class="setting-input" type="number" id="max-answer" value="10" min="10" max="1000000" required>
+					</div>
+					<div class="setting-group">
+						<label class="label">
+							<span class="lang-c ru">Выберите действие(-я): </span>
+							<span class="lang-c en">Select sign(s): </span>
+							<span class="lang-c lv">Izvēlieties darbību(s): </span>
+						</label>
+						<select class="sign" id="sign" required>
+							<option value="+">[+]</option>
+							<option value="-">[-]</option>
+							<option value="*">[x]</option>
+							<option value="/">[:]</option>
+							<option value="+-">[+]  [-]</option>
+							<option value="*/">[x]  [:]</option>
+							<option value="+-*">[+]  [-]  [x]</option>
+							<option value="+-*/">[+]  [-]  [x]  [:]</option>
+						</select>
+					</div>
+				</section>
+
+				<h1>
+					<span class="lang-c ru">Поставьте цель:</span>
+					<span class="lang-c lv">Iestatiet mērķi:</span>
+					<span class="lang-c en">Set a goal:</span>
+				</h1>	
+
+				<section>
+					<div class="setting-group">
+						<label class="label">
+							<span class="lang-c en">Desired number of examples: </span>
+							<span class="lang-c ru">Желаемое количество примеров: </span>
+							<span class="lang-c lv">Vēlamais piemēru skaits: </span>
+						</label>
+						<input class="setting-input" type="number" id="exercises-count" min="5" max="1000000" placeholder="Автоматически" value="10">
+					</div>
+					<div class="setting-group">
+						<label class="label">
+							<span class="lang-c ru">Вес ошибки:</span> 
+							<span class="lang-c lv">Kļūdas svars:</span> 
+							<span class="lang-c en">Error weight:</span> 
+						</label>
+						<input class="setting-input" max="100" type="number" id="error-weight" placeholder="Автоматически" value="0" min="0">
+					</div>
+				</section>
+				<input type="submit" value="GO" id="go-button">
+			</form>
+		</section>
+
+		<!-- EXERCISE / STATISTIC -->
+		<section class="exercise-block" id="exercise-block">
+			<!-- EXERCISE -->
+			<div class="exercise-container">
+				<form class="exercise-form" onSubmit="checkAnswerAndGenerateNew(event)">
+					<div class="exercise-div" id="exercise-div">
+						<label class="number"><span id="first-num"></span></label>
+						<label class="sign"><span id="current-sign"></span></label>
+						<label class="number"><span id="second-num"></span></label>
+						<label class="sign">=</label>
+						<input class="answer" id="answer" type="number" autocomplete="off" min="0" autofocus required>						
+					</div>
+					<div class="error-div" id="error-div">
+						<label class="number"><span id="err-first-num"></span></label>
+						<label class="sign"><span id="err-current-sign"></span></label>
+						<label class="number"><span id="err-second-num"></span></label>
+						<label class="sign">=</label>
+						<input class="answer" id="err-answer" type="number" autocomplete="off" min="0" readonly required>
+					</div>
+					<input value="CHECK" type="submit" id="check-button">
+				</form>
+			</div>
+
+			<!-- STATISTIC -->
+			<div class="statistic-container" id="statistic-container">
+				<a class="closebtn" id="closebtn" onclick="closeStatistic()"><i class="fa fa-arrow-down"></i></a>
+				<a class="btn endbtn" id="endbtn" onClick="endExercise();"><i class="fa fa-times"></i></a>
+				<a class="btn pausebtn" id="pausebtn" onClick="pauseExercise();"><i class="fa fa-pause"></i></a>
+				<a class="btn playbtn" id="playbtn" onClick="playExercise();"><i class="fa fa-play"></i></a>
+				<p>
+					<span class="lang-c ru">Правильно решенные примеры: &MediumSpace;</span>
+					<span class="lang-c en">Correctly solved examples: &MediumSpace;</span>
+					<span class="lang-c lv">Pareizi atrisināti piemēri: &MediumSpace;</span>
+					<span id="correct-answers"></span>
+				</p>
+				<p>
+					<span class="lang-c ru">Совершено ошибок: &MediumSpace;</span>
+					<span class="lang-c lv">Pieļautās kļūdas: &MediumSpace;</span>
+					<span class="lang-c en">Mistakes committed: &MediumSpace;</span>
+					<span id="wrong-answers"></span>
+				</p>
+				<p>
+					<span class="lang-c ru">Время текущего примера: &MediumSpace;</span>
+					<span class="lang-c en">Current example time: &MediumSpace;</span>
+					<span class="lang-c lv">Pašreizējais piemērs laiks: &MediumSpace;</span>
+					<span id="current-exercise-time"></span>
+				</p>
+			</div>
+			<div class="statistic-button-container" id="statistic-button-container">
+				<a onClick="openStatistic();">
+					<span class="lang-c ru">Статистика и настройки </span>
+					<span class="lang-c lv">Statistika un iestatījumi </span>
+					<span class="lang-c en">Statistics and settings </span>
+					<i class="fa fa-arrow-up"></i>
+				</a>
+			</div>
+
+			<!-- GOALS -->
+			<div class="goal-statistic" id="goal-statistic">
+				<p>
+					<span class="lang-c ru">Сделано примеров:&MediumSpace;</span>
+					<span class="lang-c en">Made examples:&MediumSpace;</span>
+					<span class="lang-c lv">Izgatavoti piemēri:&MediumSpace;</span>
+					<span id="all-answers"></span>
+					<span class="lang-c ru">&MediumSpace;из&MediumSpace;</span>
+					<span class="lang-c lv">&MediumSpace;no&MediumSpace;</span>
+					<span class="lang-c en">&MediumSpace;out of&MediumSpace;</span>
+					<span id="goal-count"></span>
+				</p>
+				<p>
+					<span class="lang-c ru">Общее время:&MediumSpace;</span>
+					<span class="lang-c en">Total time:&MediumSpace;</span>
+					<span class="lang-c lv">Kopējais laiks:&MediumSpace;</span>
+					<span id="all-time"></span>
+				</p>
+			</div>
+
+			<!-- FULLSCREEN -->
+			<div class="full-screen-container">
+				<button id="fullscreen-button"><i class="fa fa-expand"></i></button>
+			</div>
+		</section>
+
+		<!-- EXERCISE END -->
+		<section class="exercise-end" id="exercise-end">
+			<h1>
+				<span class="lang-c ru">Поздравляю, упражнение выполнено!</span>
+				<span class="lang-c lv">Apsveicam, vingrinājums ir pabeigts!</span>
+				<span class="lang-c en">Congratulations, the exercise is completed!</span>
+			</h1>
+			
+			<p>
+				<span class="lang-c ru">Совершено ошибок: &MediumSpace;</span>
+				<span class="lang-c lv">Pieļautās kļūdas: &MediumSpace;</span>
+				<span class="lang-c en">Mistakes committed: &MediumSpace;</span>
+				<span id="wrong-answers-end"></span>
+			</p>
+			<p>
+				<span class="lang-c ru">Правильно решенные примеры: &MediumSpace;</span>
+				<span class="lang-c en">Correctly solved examples: &MediumSpace;</span>
+				<span class="lang-c lv">Pareizi atrisināti piemēri: &MediumSpace;</span>
+				<span id="correct-answers-end"></span>
+			</p>
+			<p>
+				<span class="lang-c ru">Общее время: &MediumSpace;</span>
+				<span class="lang-c en">Total time: &MediumSpace;</span>
+				<span class="lang-c lv">Kopējais laiks: &MediumSpace;</span>			
+				<span id="all-time-end"></span>
+			</p>
+			<section class="links">
+				<a href="../exercises/">
+					<span class="lang-c ru">Сделать ещё задание</span>
+					<span class="lang-c en">Do another task</span>
+					<span class="lang-c lv">Izpildit citu uzdevumu</span>
+				</a>
+				<a href="../statistic/">
+					<span class="lang-c ru">Посмотреть статистику</span>
+					<span class="lang-c lv">Skatīt statistiku</span>
+					<span class="lang-c en">View statistics</span>
+				</a>
+				<a href="../profile/">
+					<span class="lang-c ru">Вернуться на главную</span>
+					<span class="lang-c en">Return to home</span>
+					<span class="lang-c lv">Atgriezieties galvenajā lapā</span>
+				</a>
+			</section>
+		</section>
+	</main>	
+
+	<script src="../../js/exercise/exercise.js"></script>
+</body>
+</html>

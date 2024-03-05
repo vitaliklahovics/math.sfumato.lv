@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calendar</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/x-icon" href="https://math.sfumato.lv/images/site/icon/favicon.ico">
+	
+	<link rel="stylesheet" href="../../css/base.css">	
+	<link rel="stylesheet" href="../../css/app/app.css">	
+	<link rel="stylesheet" href="../../css/app/calendar.css">	
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="body">
+	<!-- NAVBAR -->
+	<nav id="nav">
+		<section class="top-part" id="top-part">
+			<div class="image">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</div>
+		</section>
+		<section class="menu-part">
+			<a href="../profile/">
+				<i class="fa fa-home"></i> 
+				<span class="lang-c ru">Главная</span>
+				<span class="lang-c lv">Uz galveno</span>
+				<span class="lang-c en">Home</span>
+			</a>
+			<a href="../exercises/">
+				<i class="fa fa-book"></i>
+				<span class="lang-c ru">Упражнения</span>
+				<span class="lang-c en">Exercises</span>
+				<span class="lang-c lv">Vingrinājumi</span>
+			</a>
+			<a href="../game/">
+				<i class="fa fa-gamepad"></i>
+				<span class="lang-c ru">Игра</span>
+				<span class="lang-c lv">Spēle</span>
+				<span class="lang-c en">Game</span>
+			</a>
+			<a href="../statistic/">
+				<i class="fa fa-bar-chart"></i>
+				<span class="lang-c ru">Статистика</span>
+				<span class="lang-c en">Statistics</span>
+				<span class="lang-c lv">Statistika</span>
+			</a>
+			<a href="../calendar/" class="active">
+				<i class="fa fa-calendar"></i>
+				<span class="lang-c ru">Календарь</span>
+				<span class="lang-c lv">Kalendārs</span>
+				<span class="lang-c en">Calendar</span>
+			</a>
+		</section>
+		<section class="settings">
+			<a href="../settings/">
+				<i class="fa fa-gear"></i> 
+				<span class="lang-c ru">Настройки</span>
+				<span class="lang-c lv">Iestatījumi</span>
+				<span class="lang-c en">Settings</span>
+			</a>
+		</section>
+	</nav>
+	<section class="small" id="small">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="navicon-block">
+			<div class="menu-icon-div" onclick="opennav()">
+				<p><i class="fa fa-navicon"></i></p>
+			</div>
+		</section>
+	</section>
+	<section class="overlay" id="overlay" onclick="closenav()"></section>
+	<script>
+		function opennav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+			var body = document.getElementById("body");
+
+			nav.classList.remove("zero-nav");
+			nav.classList.add("nozero-nav");
+			overlay.style.display = "block";
+			overlay.style.opacity = "1";
+			body.style.overflow = "hidden";
+		}
+
+		function closenav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+
+			nav.classList.add("zero-nav");
+			nav.classList.remove("nozero-nav");
+			overlay.style.opacity = "0";
+			overlay.style.display = "none";
+			body.style.overflow = "auto";
+		}
+	</script>
+
+	<main>
+		<h1>
+			<span class="lang-c ru">Список файлов пользователя</span>
+			<span class="lang-c lv">Lietotāju failu saraksts</span>
+			<span class="lang-c en">List of user files</span>
+		</h1>
+		<div id="fileList"></div>		
+	</main>
+	<div id="file-content"></div>
+	<div id="overlayF" onclick="closeFileContent()"></div>
+
+	<script src="../../js/calendar/calendar.js"></script>
+</body>
+</html>

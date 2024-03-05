@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media (max-width: 500px) {	
+	main {
+		font-size: small;
+	}
+}
+
+main {
+    width: calc(0.9*(100vw - 250px) - 40px);
+    padding: 20px;
+    margin: 30px calc(0.05*(100vw - 250px));
+    background-color: #fefefe;
+}
+
+#fileList a {
+    color: var(--text-color);
+    padding: 10px;
+    margin: 5px;
+}
+
+main h1 {
+    text-decoration: underline;
+    text-decoration-color: var(--base-color);
+}
+
+#file-content {
+    position: fixed;
+    width: calc(0.9*(100vw - 250px) - 40px);
+    padding: 20px;
+    margin: 30px calc(0.05*(100vw - 250px));
+    top: 0;
+    right: 0;
+    background-color: #fefefe;
+    opacity: 0;
+    transition: .3s;
+    z-index: 3;
+    max-height: 67vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+}
+
+#overlayF {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: calc(100vw - 250px);
+    height: 100vh;
+    right: 0px;
+    top: 0;
+    opacity: 0;
+    z-index: 2;
+    display: none;
+    transition: .3s;
+}
+
+#file-content table {
+    margin: 1%;
+    width: 98%;
+    border: 1px solid var(--text-color);
+}
+
+#file-content table th {
+    color: var(--base-color);
+    padding: 20px 10px;
+    border-bottom: 1px solid var(--base-color);
+}
+
+#file-content table td {
+    text-align: center;
+    padding: 15px 10px;
+}
+
+@media (max-width: 1175px) {
+	main {
+		width: calc(0.9*(100vw) - 40px);
+        margin: 90px calc(0.05*(100vw)) 30px;
+	}
+
+	#file-content {
+        width: calc(0.9*(100vw) - 40px);
+        margin: 90px calc(0.05*(100vw)) 30px;
+    }
+
+    #overlayF {
+        width: 100vw;
+    }
+}

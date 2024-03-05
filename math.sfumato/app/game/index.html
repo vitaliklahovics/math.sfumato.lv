@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/x-icon" href="https://math.sfumato.lv/images/site/icon/favicon.ico">
+	
+	<link rel="stylesheet" href="../../css/base.css">	
+	<link rel="stylesheet" href="../../css/app/app.css">	
+	<link rel="stylesheet" href="../../css/app/game.css">	
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="body">
+	<!-- NAVBAR -->
+	<nav id="nav">
+		<section class="top-part" id="top-part">
+			<div class="image">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</div>
+		</section>
+		<section class="menu-part">
+			<a href="../profile/">
+				<i class="fa fa-home"></i> 
+				<span class="lang-c ru">Главная</span>
+				<span class="lang-c lv">Uz galveno</span>
+				<span class="lang-c en">Home</span>
+			</a>
+			<a href="../exercises/">
+				<i class="fa fa-book"></i>
+				<span class="lang-c ru">Упражнения</span>
+				<span class="lang-c en">Exercises</span>
+				<span class="lang-c lv">Vingrinājumi</span>
+			</a>
+			<a href="../game/" class="active">
+				<i class="fa fa-gamepad"></i>
+				<span class="lang-c ru">Игра</span>
+				<span class="lang-c lv">Spēle</span>
+				<span class="lang-c en">Game</span>
+			</a>
+			<a href="../statistic/">
+				<i class="fa fa-bar-chart"></i>
+				<span class="lang-c ru">Статистика</span>
+				<span class="lang-c en">Statistics</span>
+				<span class="lang-c lv">Statistika</span>
+			</a>
+			<a href="../calendar/">
+				<i class="fa fa-calendar"></i>
+				<span class="lang-c ru">Календарь</span>
+				<span class="lang-c lv">Kalendārs</span>
+				<span class="lang-c en">Calendar</span>
+			</a>
+		</section>
+		<section class="settings">
+			<a href="../settings/">
+				<i class="fa fa-gear"></i> 
+				<span class="lang-c ru">Настройки</span>
+				<span class="lang-c lv">Iestatījumi</span>
+				<span class="lang-c en">Settings</span>
+			</a>
+		</section>
+	</nav>
+	<section class="small" id="small">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="navicon-block">
+			<div class="menu-icon-div" onclick="opennav()">
+				<p><i class="fa fa-navicon"></i></p>
+			</div>
+		</section>
+	</section>
+	<section class="overlay" id="overlay" onclick="closenav()"></section>
+	<script>
+		function opennav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+			var body = document.getElementById("body");
+
+			nav.classList.remove("zero-nav");
+			nav.classList.add("nozero-nav");
+			overlay.style.display = "block";
+			overlay.style.opacity = "1";
+			body.style.overflow = "hidden";
+		}
+
+		function closenav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+
+			nav.classList.add("zero-nav");
+			nav.classList.remove("nozero-nav");
+			overlay.style.opacity = "0";
+			overlay.style.display = "none";
+			body.style.overflow = "auto";
+		}
+	</script>
+
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+
+	<div class="confetti">
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+		<div class="confetti-piece"></div>
+	</div>
+	<div class="confetti">
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+		<div class="confetti-piece" style="top: 200px !important;"></div>
+	</div>
+	<div class="confetti">
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+		<div class="confetti-piece" style="top: 400px !important;"></div>
+	</div>
+
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+	<!-- CONFETI -->
+
+	<main id="main">
+		<!-- GAME -->
+		<div class="record" id="record-container">
+			<p style="display: flex; justify-content: center;">
+				<span class="lang-c ru">Ваш последний рекорд в текущем режиме</span>
+				<span class="lang-c lv">Jūsu pēdējais rekords pašreizējā režīmā ir</span>
+				<span class="lang-c en">Your last record in the current mode is</span>
+				&MediumSpace;
+				<span id="record">10</span>
+			</p>
+		</div>
+		<div id="game-container">
+			<div id="field"></div>
+			<input type="number" id="answer" placeholder="" autocomplete="off" name="answer">
+			<div id="settings">
+				<form>
+					<h1>
+						<span class="lang-c ru">Выберите режим:</span>
+						<span class="lang-c en">Select mode:</span>
+						<span class="lang-c lv">Izvēlieties režīmu:</span>
+					</h1>
+					<div class="variants">
+						<label>
+							<input type="radio" value="multiplicationtable" name="game" checked>
+							<span class="lang-c ru">Таблица умножения</span>
+							<span class="lang-c en">Multiplication table</span>
+							<span class="lang-c lv">Reizināšanas tabula</span>
+						</label>
+						<label>
+							<input type="radio" value="max10" name="game" checked>
+							<span class="lang-c ru">[+] [-] до 10</span>
+							<span class="lang-c en">[+] [-] to 10</span>
+							<span class="lang-c lv">[+] [-] līdz 10</span>
+						</label>
+						<label>
+							<input type="radio" value="max20" name="game">
+							<span class="lang-c ru">[+] [-] до 20</span>
+							<span class="lang-c en">[+] [-] to 20</span>
+							<span class="lang-c lv">[+] [-] līdz 20</span>
+						</label>
+					</div>
+					<h1>
+						<span class="lang-c ru">Выберите сложность:</span>
+						<span class="lang-c lv">Izvēlieties grūtības pakāpi:</span>
+						<span class="lang-c en">Select difficulty:</span>
+					</h1>
+					<div class="variants">
+						<label>
+							<input type="radio" value="easy" name="difficulty" checked>
+							<span class="lang-c ru">Легко</span>
+							<span class="lang-c en">Easy</span>
+							<span class="lang-c lv">Viegli</span>
+						</label>
+						<label>
+							<input type="radio" value="normal" name="difficulty">
+							<span class="lang-c ru">Нормально</span>
+							<span class="lang-c lv">Vidēji</span>
+							<span class="lang-c en">Normal</span>
+						</label>
+						<label>
+							<input type="radio" value="hard" name="difficulty">
+							<span class="lang-c ru">Сложно</span>
+							<span class="lang-c lv">Grūti</span>
+							<span class="lang-c en">Hard</span>
+						</label>
+					</div>
+					<button id="startButton">
+						<span class="lang-c ru">Играть</span>
+						<span class="lang-c lv">Spēlēt</span>
+						<span class="lang-c en">Play</span>				
+					</button>
+				</form>
+			</div>
+			<div id="end">
+				<h1 style="display: flex; justify-content: center; flex-wrap: wrap;">
+					<span class="lang-c ru">Поздравляю, ты набрал(-а) </span>
+					<span class="lang-c lv">Apsveicam, esat ieguvis </span>
+					<span class="lang-c en">Congratulations, you've scored </span>
+					&MediumSpace;
+					<span id="count-end"></span>
+					&MediumSpace;
+					<span class="lang-c ru">очко(-oв)!!!</span>
+					<span class="lang-c lv">punktu(-s)!!!</span>
+					<span class="lang-c en">point(-s)!!!</span>
+				</h1>
+
+				<button id="startAgain">
+					<span class="lang-c ru">Сыграть еще раз</span>
+					<span class="lang-c lv">Spēlēt vēlreiz</span>
+					<span class="lang-c en">Play again</span>
+				</button>
+			</div>
+			<div id="hearts"></div>
+			<div id="count">
+				<span class="lang-c ru">Сделанные примеры: 0</span>
+				<span class="lang-c en">Made examples: 0</span>
+				<span class="lang-c lv">Veikti piemēri: 0</span>
+			</div>
+		</div>	
+	</main>
+
+	<script src="../../js/game/game.js"></script>	
+</body>
+</html>

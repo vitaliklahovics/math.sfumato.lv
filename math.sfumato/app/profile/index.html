@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/x-icon" href="../../images/site/icon/favicon.ico">
+	
+	<link rel="stylesheet" href="../../css/base.css">	
+	<link rel="stylesheet" href="../../css/app/app.css">	
+	<link rel="stylesheet" href="../../css/app/profile.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="body">	
+	<div id="top"></div>
+
+	<!-- NAVBAR -->
+	<nav id="nav">
+		<section class="top-part" id="top-part">
+			<div class="image">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</div>
+		</section>
+		<section class="menu-part">
+			<a href="../profile/" class="active">
+				<i class="fa fa-home"></i> 
+				<span class="lang-c ru">Главная</span>
+				<span class="lang-c lv">Uz galveno</span>
+				<span class="lang-c en">Home</span>
+			</a>
+			<a href="../exercises/">
+				<i class="fa fa-book"></i>
+				<span class="lang-c ru">Упражнения</span>
+				<span class="lang-c en">Exercises</span>
+				<span class="lang-c lv">Vingrinājumi</span>
+			</a>
+			<a href="../game/">
+				<i class="fa fa-gamepad"></i>
+				<span class="lang-c ru">Игра</span>
+				<span class="lang-c lv">Spēle</span>
+				<span class="lang-c en">Game</span>
+			</a>
+			<a href="../statistic/">
+				<i class="fa fa-bar-chart"></i>
+				<span class="lang-c ru">Статистика</span>
+				<span class="lang-c en">Statistics</span>
+				<span class="lang-c lv">Statistika</span>
+			</a>
+			<a href="../calendar/">
+				<i class="fa fa-calendar"></i>
+				<span class="lang-c ru">Календарь</span>
+				<span class="lang-c lv">Kalendārs</span>
+				<span class="lang-c en">Calendar</span>
+			</a>
+		</section>
+		<section class="settings">
+			<a href="../settings/">
+				<i class="fa fa-gear"></i> 
+				<span class="lang-c ru">Настройки</span>
+				<span class="lang-c lv">Iestatījumi</span>
+				<span class="lang-c en">Settings</span>
+			</a>
+		</section>
+	</nav>
+	<section class="small" id="small">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="navicon-block">
+			<div class="menu-icon-div" onclick="opennav()">
+				<p><i class="fa fa-navicon"></i></p>
+			</div>
+		</section>
+	</section>
+	<section class="overlay" id="overlay" onclick="closenav()"></section>
+	<script>
+		function opennav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+			var body = document.getElementById("body");
+
+			nav.classList.remove("zero-nav");
+			nav.classList.add("nozero-nav");
+			overlay.style.display = "block";
+			overlay.style.opacity = "1";
+			body.style.overflow = "hidden";
+		}
+
+		function closenav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+
+			nav.classList.add("zero-nav");
+			nav.classList.remove("nozero-nav");
+			overlay.style.opacity = "0";
+			overlay.style.display = "none";
+			body.style.overflow = "auto";
+		}
+	</script>
+
+	<main>
+		<!-- TOP PART -->
+		<section class="top">
+			<h1 style="display: flex; justify-content: center;">
+				<span class="lang-c ru">Привет,</span><span class="lang-c en">Hello,</span><span class="lang-c lv">Sveiki,</span>&MediumSpace;<span id="user-name"></span>!
+			</h1>
+			<h4>
+				<span class="lang-c ru">Готов/-а позаниматься математикой?</span>
+				<span class="lang-c lv">Vai esi gatavs/-a matemātikai?</span>
+				<span class="lang-c en">Ready to do some math?</span>
+			</h4>
+		</section>
+
+		<!-- EXERCISES -->
+		<section class="what-we-can-do">
+			<div class="exercise" onclick="window.location.href = '../exercises/'">
+				<div class="header">
+					<h1>
+						<span class="lang-c ru">Упражнения</span>
+						<span class="lang-c lv">Vingrinājumi</span>
+						<span class="lang-c en">Exercises</span>
+					</h1>
+				</div>
+				<div class="image" id="exercise-image" style="background-position: bottom center;"></div>
+			</div>
+			<div class="exercise" onclick="window.location.href = '../game/'">
+				<div class="header">
+					<h1>
+						<span class="lang-c ru">Игра</span>
+						<span class="lang-c en">Game</span>
+						<span class="lang-c lv">Spēle</span>
+					</h1>
+				</div>
+				<div class="image" id="game-image" style="background-position: top center;"></div>
+			</div>
+		</section>
+
+		<!-- STATISTIK -->
+		<section class="what-we-can-do statistik">
+			<div class="exercise" onclick="window.location.href = '../statistic/'">
+				<div class="header">
+					<h1>
+						<span class="lang-c ru">Статистика</span>
+						<span class="lang-c lv">Statistika</span>
+						<span class="lang-c en">Statistics</span>
+					</h1>
+				</div>			
+				<div class="image" id="statistic-image" style="background-position: top center;"></div>
+			</div>
+			<div class="exercise" onclick="window.location.href = '../calendar/'">
+				<div class="header">
+					<h1>
+						<span class="lang-c ru">Календарь</span>
+						<span class="lang-c en">Calendar</span>
+						<span class="lang-c lv">Kalendārs</span>
+					</h1>
+				</div>			
+				<div class="image" id="calendar-image" style="background-position: top center;"></div>
+			</div>
+		</section>
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<section class="logo">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</section>
+			<section class="to-top">
+				<button onclick="scrollToTop()"><i class="fa fa-angle-up"></i></button>
+			</section>
+			<section class="copyright">
+				Copyright © 2024 math.sfumato.lv
+			</section>
+		</footer>	
+	</main>
+
+	<script src="../../js/profile/profile.js"></script>	
+</body>
+</html>

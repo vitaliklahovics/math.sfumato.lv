@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Statistics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/x-icon" href="https://math.sfumato.lv/images/site/icon/favicon.ico">
+	
+	<link rel="stylesheet" href="../../css/base.css">	
+	<link rel="stylesheet" href="../../css/app/app.css">	
+	<link rel="stylesheet" href="../../css/app/statistics.css">	
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js'></script>
+</head>
+
+<body id="body">
+	<div id="top"></div>
+	
+	<!-- NAVBAR -->
+	<nav id="nav">
+		<section class="top-part" id="top-part">
+			<div class="image">
+				<img alt="logo" src="../../images/site/logo/logo-noback.png">
+			</div>
+		</section>
+		<section class="menu-part">
+			<a href="../profile/">
+				<i class="fa fa-home"></i> 
+				<span class="lang-c ru">Главная</span>
+				<span class="lang-c lv">Uz galveno</span>
+				<span class="lang-c en">Home</span>
+			</a>
+			<a href="../exercises/">
+				<i class="fa fa-book"></i>
+				<span class="lang-c ru">Упражнения</span>
+				<span class="lang-c en">Exercises</span>
+				<span class="lang-c lv">Vingrinājumi</span>
+			</a>
+			<a href="../game/">
+				<i class="fa fa-gamepad"></i>
+				<span class="lang-c ru">Игра</span>
+				<span class="lang-c lv">Spēle</span>
+				<span class="lang-c en">Game</span>
+			</a>
+			<a href="../statistic/" class="active">
+				<i class="fa fa-bar-chart"></i>
+				<span class="lang-c ru">Статистика</span>
+				<span class="lang-c en">Statistics</span>
+				<span class="lang-c lv">Statistika</span>
+			</a>
+			<a href="../calendar/">
+				<i class="fa fa-calendar"></i>
+				<span class="lang-c ru">Календарь</span>
+				<span class="lang-c lv">Kalendārs</span>
+				<span class="lang-c en">Calendar</span>
+			</a>
+		</section>
+		<section class="settings">
+			<a href="../settings/">
+				<i class="fa fa-gear"></i> 
+				<span class="lang-c ru">Настройки</span>
+				<span class="lang-c lv">Iestatījumi</span>
+				<span class="lang-c en">Settings</span>
+			</a>
+		</section>
+	</nav>
+	<section class="small" id="small">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="navicon-block">
+			<div class="menu-icon-div" onclick="opennav()">
+				<p><i class="fa fa-navicon"></i></p>
+			</div>
+		</section>
+	</section>
+	<section class="overlay" id="overlay" onclick="closenav()"></section>
+	<script>
+		function opennav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+			var body = document.getElementById("body");
+
+			nav.classList.remove("zero-nav");
+			nav.classList.add("nozero-nav");
+			overlay.style.display = "block";
+			overlay.style.opacity = "1";
+			body.style.overflow = "hidden";
+		}
+
+		function closenav() {
+			var nav = document.getElementById("nav");
+			var overlay = document.getElementById("overlay");
+
+			nav.classList.add("zero-nav");
+			nav.classList.remove("nozero-nav");
+			overlay.style.opacity = "0";
+			overlay.style.display = "none";
+			body.style.overflow = "auto";
+		}
+	</script>
+
+	<main>
+		<!-- EXERCISE STATISTICS -->
+		<div class="exerise">
+			<div class="text">
+				<h1>
+					<span class="lang-c ru">Статистика упражнений</span>
+					<span class="lang-c en">Exercise statistics</span>
+					<span class="lang-c lv">Vingrinājumu statistika</span>
+				</h1>
+				
+				<div class="">
+					<p style="display: flex;">
+						<span class="lang-c ru">Правильно решенные примеры:</span> 
+						<span class="lang-c en">Correctly solved examples:</span> 
+						<span class="lang-c lv">Pareizi risināti piemēri:</span> 
+						&MediumSpace;
+						<span id="correct-answers"></span>
+					</p>
+					<p style="display: flex;">
+						<span class="lang-c ru">Сделано ошибок:</span> 
+						<span class="lang-c en">Mistakes made:</span> 
+						<span class="lang-c lv">Pieļautās kļūdas:</span> 
+						&MediumSpace;
+						<span id="wrong-answers"></span>
+					</p>
+					<p style="display: flex;">
+						<span class="lang-c ru">Коэффициент:</span> 
+						<span class="lang-c en">Coefficient:</span> 
+						<span class="lang-c lv">Koeficients:</span> 
+						&MediumSpace;
+						<span id="koefficent"></span>
+					</p>
+				</div>
+			</div>
+			<div class="circle">
+				<canvas id="myChart" width="300px" height="auto"></canvas>
+			</div>
+
+		</div>
+
+		<!-- EXERCISE TOP -->
+		<div class="exercise-top">
+			<h1>
+				<span class="lang-c ru">Топ:</span>
+				<span class="lang-c en">Top:</span>
+				<span class="lang-c lv">Tops:</span>
+			</h1>
+			<div class="arrow-container">
+				<div class="arrow"></div>
+			</div>			
+			<div style="overflow-x: scroll;">
+				<table>
+					<tr>
+						<th>
+							<span class="lang-c ru">Место</span>
+							<span class="lang-c en">Place</span>
+							<span class="lang-c lv">Vieta</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Имя</span>
+							<span class="lang-c en">Name</span>
+							<span class="lang-c lv">Vārds</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Коэффициент</span>
+							<span class="lang-c en">Coefficient</span>
+							<span class="lang-c lv">Koeficients</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Правильные пр.</span>
+							<span class="lang-c en">Correct ans.</span>
+							<span class="lang-c lv">Pareizas atb.</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Ошибки</span>
+							<span class="lang-c en">Mistakes</span>
+							<span class="lang-c lv">Kļūdas</span>
+						</th>
+					</tr>
+					<tr>
+						<td id="place1">№1</td>
+						<td id="name1"></td>
+						<td id="koefficent1"></td>
+						<td id="correct-answers1"></td>
+						<td id="wrong-answers1"></td>
+					</tr>
+					<tr>
+						<td>№2</td>
+						<td id="name2"></td>
+						<td id="koefficent2"></td>
+						<td id="correct-answers2"></td>
+						<td id="wrong-answers2"></td>
+					</tr>
+					<tr>
+						<td>№3</td>
+						<td id="name3"></td>
+						<td id="koefficent3"></td>
+						<td id="correct-answers3"></td>
+						<td id="wrong-answers3"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<!-- GAME TOP -->
+		<div class="exercise-top">
+			<h1>
+				<span class="lang-c ru">Топ (игра):</span>
+				<span class="lang-c en">Top (game):</span>
+				<span class="lang-c lv">Tops (spēle):</span>
+			</h1>
+			<div class="arrow-container">
+				<div class="arrow"></div>
+			</div>			
+			<div style="overflow-x: scroll;">
+				<table>
+					<tr>
+						<th>
+							<span class="lang-c ru">Место</span>
+							<span class="lang-c en">Place</span>
+							<span class="lang-c lv">Vieta</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Имя</span>
+							<span class="lang-c en">Name</span>
+							<span class="lang-c lv">Vārds</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Рекорд</span>
+							<span class="lang-c en">Record</span>
+							<span class="lang-c lv">Labākais rez.</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Режим</span>
+							<span class="lang-c en">Mode</span>
+							<span class="lang-c lv">Režīms</span>
+						</th>
+						<th>
+							<span class="lang-c ru">Сложность</span>
+							<span class="lang-c en">Difficulty</span>
+							<span class="lang-c lv">Sarežģītība</span>
+						</th>
+					</tr>
+					<tr>
+						<td id="place1-g">№1</td>
+						<td id="name1-g"></td>
+						<td id="record1-g"></td>
+						<td id="mode1-g"></td>
+						<td id="difficulty1-g"></td>
+					</tr>
+					<tr>
+						<td>№2</td>
+						<td id="name2-g"></td>
+						<td id="record2-g"></td>
+						<td id="mode2-g"></td>
+						<td id="difficulty2-g"></td>
+					</tr>
+					<tr>
+						<td>№3</td>
+						<td id="name3-g"></td>
+						<td id="record3-g"></td>
+						<td id="mode3-g"></td>
+						<td id="difficulty3-g"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</main>
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<section class="logo">
+			<img alt="logo" src="../../images/site/logo/logo-noback.png">
+		</section>
+		<section class="to-top">
+			<button onclick="scrollToTop()"><i class="fa fa-angle-up"></i></button>
+		</section>
+		<section class="copyright">
+			Copyright © 2024 math.sfumato.lv
+		</section>
+	</footer>	
+
+
+	<script src="../../js/statistics/statistics.js"></script>
+</body>
+</html>
